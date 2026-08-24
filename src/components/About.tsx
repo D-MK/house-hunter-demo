@@ -22,6 +22,7 @@ import {
   PROCESS_STEPS,
 } from "@/content/about";
 import type { ProcessStep } from "@/content/about";
+import { GITHUB_REPO, githubFile } from "@/lib/repo";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -185,9 +186,17 @@ function AboutDialog({ onClose }: { onClose: () => void }) {
             </ol>
           </section>
 
-          <p className="border-t border-paper-300 pt-4 text-xs leading-relaxed text-ink-500">
-            {ABOUT_CLOSING}
-          </p>
+          <div className="border-t border-paper-300 pt-4">
+            <p className="text-xs leading-relaxed text-ink-500">
+              {ABOUT_CLOSING}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-semibold">
+              <SourceLink href={githubFile("ARCHITECTURE.md")}>
+                ARCHITECTURE.md
+              </SourceLink>
+              <SourceLink href={GITHUB_REPO}>Full source on GitHub</SourceLink>
+            </div>
+          </div>
         </div>
       </div>
     </div>,
@@ -248,8 +257,46 @@ function StepItem({
         <p className="mt-1 text-[13px] leading-snug text-ink-600">
           {step.detail}
         </p>
+        <SourceLink href={githubFile(step.sourcePath)} small>
+          {step.sourcePath}
+        </SourceLink>
       </div>
     </li>
+  );
+}
+
+/** A small external link back to this project's own repo. Always opens in a
+ *  new tab — clicking it should never lose the visitor's live search state. */
+function SourceLink({
+  href,
+  small = false,
+  children,
+}: {
+  href: string;
+  small?: boolean;
+  children: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-1 text-ink-500 underline decoration-paper-300 decoration-1 underline-offset-2 transition hover:text-ink-900 hover:decoration-ink-900 ${small ? "mt-1.5 text-[11px]" : ""}`}
+    >
+      {children}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 12 12"
+        className={small ? "h-2.5 w-2.5" : "h-3 w-3"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M4 2h6v6M10 2 2 10" />
+      </svg>
+    </a>
   );
 }
 

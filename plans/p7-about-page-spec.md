@@ -8,7 +8,7 @@ No new listing/filter types. New presentational content module: `src/content/abo
 
 ## Security Requirements
 - [ ] No `dangerouslySetInnerHTML` in the new component.
-- [ ] No new external network requests of any kind (no external images, no external fonts, no analytics) — the site's footer claims "no analytics" and "the only network request is OpenStreetMap tiles"; this page must not break that claim. The infographic is built from inline SVG/CSS only.
+- [ ] No *automatic* external network requests (no external images, no external fonts, no analytics, nothing fetched on load) — the site's footer claims "no analytics" and "the only [automatic] network request is OpenStreetMap tiles"; this page must not break that claim. The infographic is built from inline SVG/CSS only. **Amended post-launch:** explicit, user-clickable `<a href>` links to this project's own public GitHub repo (added so recruiters can jump from a demo section straight to the source that implements it) are allowed — a link a visitor must deliberately click is not an automatic request, and it points at the project's own already-public source, not a third party. No other external domains, and still no auto-loaded resources of any kind.
 - [ ] Modal is keyboard-dismissible (Escape) and reachable via visible nav (not hidden/undiscoverable).
 
 ## Acceptance criteria
@@ -18,9 +18,9 @@ No new listing/filter types. New presentational content module: `src/content/abo
 cd house-hunter-demo && ! grep -r "dangerouslySetInnerHTML" src/components/About*.tsx src/content/about.ts 2>/dev/null
 ```
 
-### No new external requests introduced
+### No external requests beyond OpenStreetMap tiles and this project's own GitHub repo
 ```bash
-cd house-hunter-demo && ! grep -rE "https?://(?!.*openstreetmap)" src/content/about.ts src/components/About*.tsx 2>/dev/null
+cd house-hunter-demo && ! grep -rE "https?://" src/content/about.ts src/components/About*.tsx 2>/dev/null | grep -vE "openstreetmap|github.com/D-MK/house-hunter-demo"
 ```
 
 ### Copy stays concise (recruiter-readable, not an essay)

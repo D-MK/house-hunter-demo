@@ -9,6 +9,7 @@ import { ParseBreakdown } from "@/components/ParseBreakdown";
 import { PromptBox } from "@/components/PromptBox";
 import { ResultsSection } from "@/components/ResultsSection";
 import { SiteHeader } from "@/components/SiteHeader";
+import { GITHUB_REPO } from "@/lib/repo";
 
 export function App() {
   return (
@@ -48,6 +49,16 @@ export function App() {
             Static site · no backend · no accounts · no cookies · no analytics.
             The only network request the page makes is for OpenStreetMap map
             tiles.
+          </p>
+          <p>
+            <a
+              href={GITHUB_REPO}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-ink-500 underline decoration-paper-300 decoration-1 underline-offset-2 transition hover:text-ink-900 hover:decoration-ink-900"
+            >
+              View source on GitHub
+            </a>
           </p>
         </div>
       </footer>

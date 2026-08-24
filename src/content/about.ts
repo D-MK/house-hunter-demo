@@ -14,6 +14,8 @@ export interface ProcessStep {
   label: string;
   /** One-line caption under the label. */
   detail: string;
+  /** Repo-relative path to the source file that implements this step. */
+  sourcePath: string;
 }
 
 export const ABOUT_TITLE = "User generated filters";
@@ -31,18 +33,22 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     label: "Prompt",
     detail: "County, budget, beds — plus criteria no form covers.",
+    sourcePath: "src/components/PromptBox.tsx",
   },
   {
     label: "Parse",
     detail: "Each phrase maps to a filter, traced to its source words.",
+    sourcePath: "src/lib/parse.ts",
   },
   {
     label: "Query",
     detail: "Filters run against 300 listings, client-side.",
+    sourcePath: "src/lib/search.ts",
   },
   {
     label: "Results",
     detail: "Cards and map pins, each showing why it matched.",
+    sourcePath: "src/components/ResultsSection.tsx",
   },
 ];
 
