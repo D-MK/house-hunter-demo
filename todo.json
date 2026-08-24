@@ -16,12 +16,12 @@
     {
       "id": 2,
       "name": "Dataset generator",
-      "status": "todo",
+      "status": "in-progress",
       "tasks": [
-        { "task": "Build scripts/generate-dataset.ts (seeded, reproducible) producing ~300 synthetic listings", "status": "todo" },
-        { "task": "Cover all 26 counties with plausible per-county price/BER/eircode distributions", "status": "todo" },
-        { "task": "Exclude private-only fields (score, tier, dan_verdict, drive_min, reno_*, all_in_*, tags, url)", "status": "todo" },
-        { "task": "Commit generated src/data/listings.json", "status": "todo" }
+        { "task": "Build scripts/generate-dataset.ts (seeded, reproducible) producing ~300 synthetic listings", "status": "done" },
+        { "task": "Cover all 26 counties with plausible per-county price/BER/eircode distributions", "status": "done" },
+        { "task": "Exclude private-only fields (score, tier, dan_verdict, drive_min, reno_*, all_in_*, tags, url)", "status": "done" },
+        { "task": "Commit generated src/data/listings.json", "status": "todo", "note": "Generated and verified; awaiting orchestrator commit on a feature branch" }
       ]
     },
     {

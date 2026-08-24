@@ -6,6 +6,7 @@
   "description": "Public, fully static portfolio demo of a natural-language house-search UX over a synthetic Irish listings dataset.",
   "scripts": {
     "dev": "vite",
+    "generate-data": "tsx scripts/generate-dataset.ts",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json"
@@ -22,6 +23,7 @@
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
     "typescript": "^5.7.3",
     "vite": "^8.2.1"
   }
