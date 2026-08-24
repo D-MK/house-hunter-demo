@@ -16,12 +16,12 @@ export interface ProcessStep {
   detail: string;
 }
 
-export const ABOUT_TITLE = "The filter that doesn't exist";
+export const ABOUT_TITLE = "User generated filters";
 
 /** First-person origin story, one paragraph per entry. */
 export const ABOUT_MOTIVATION: string[] = [
-  "This started with a real search. I wanted a house with an outbuilding — somewhere to work from — and found that no property portal can filter for one. The forms stop at county, price, beds and BER; a garage, room for a garden office, or fibre at the door only ever live in the listing's blurb.",
-  "So this demo tries the obvious fix: describe the house you actually want in plain English, and let the words become the structured filters a normal search form never offers.",
+  "I was searching for a house with an outbuilding I could use as a home office. No Irish property portal exposes that as a filter — Daft and MyHome stop at county, price, beds and BER. Structural details like outbuildings only appear in the free-text listing description.",
+  "This demo tests one approach: accept a plain-English description of the house, parse it into structured filters, and run those filters against the dataset.",
 ];
 
 export const HOW_IT_WORKS_TITLE = "How it works";
@@ -29,27 +29,27 @@ export const HOW_IT_WORKS_TITLE = "How it works";
 /** The pipeline, in order. Rendered as the step-sequence infographic. */
 export const PROCESS_STEPS: ProcessStep[] = [
   {
-    label: "Write the brief",
+    label: "Prompt",
     detail:
-      "One plain-English sentence: county, budget, beds — and the awkward stuff, like an outbuilding or room for an office pod.",
+      "One sentence describing the house: county, budget, beds, plus criteria no form offers, like an outbuilding.",
   },
   {
-    label: "Words become filters",
+    label: "Parse",
     detail:
-      "A parser turns each phrase into a structured filter and highlights exactly which words it read.",
+      "A parser maps phrases to structured filters and highlights the words each filter came from.",
   },
   {
-    label: "Filters run the search",
+    label: "Query",
     detail:
-      "Those filters query 300 synthetic Irish listings right in the browser — the query a normal search form could never build.",
+      "The filters run against 300 synthetic Irish listings, entirely in the browser.",
   },
   {
-    label: "Results land on a map",
+    label: "Results",
     detail:
-      "Matching homes appear as cards and map pins, and every one can explain why it matched.",
+      "Matches render as cards and map pins; each result shows why it matched.",
   },
 ];
 
 /** Pointer to the deeper technical writeup — kept to one line on purpose. */
 export const ABOUT_CLOSING =
-  "Curious why the parsing is simulated rather than a live LLM call, and how the real version would work? The technical deep-dive is in ARCHITECTURE.md in this repo.";
+  "ARCHITECTURE.md in this repo covers the technical detail, including how a production version would differ from this demo.";
