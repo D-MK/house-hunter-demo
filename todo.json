@@ -51,11 +51,11 @@
     {
       "id": 5,
       "name": "Docs + deploy",
-      "status": "todo",
+      "status": "in-progress",
       "tasks": [
-        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "todo" },
-        { "task": "Write ARCHITECTURE.md with the two reviewed Mermaid diagrams (mock flow vs real production flow)", "status": "todo" },
-        { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "todo" },
+        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "done", "note": "342 words total incl. headings; live-demo link is a <LIVE_DEMO_URL> placeholder until the Pages URL exists" },
+        { "task": "Write ARCHITECTURE.md with the two reviewed Mermaid diagrams (mock flow vs real production flow)", "status": "done", "note": "both diagrams byte-identical to the in-session reviewed versions; prose covers key custody + mock trade-offs" },
+        { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "done", "note": "default GITHUB_TOKEN only; pages/id-token perms, concurrency group 'pages' with cancel-in-progress false" },
         { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "todo", "note": "Confirm repo owner/GitHub account before creation" }
       ]
     }
