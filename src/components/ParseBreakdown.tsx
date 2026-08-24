@@ -263,7 +263,7 @@ export function ParseBreakdown() {
       <p className="relative font-display text-xl leading-[2.1] text-ink-700 sm:text-2xl sm:leading-[2.2]">
         {prompt === "" ? (
           <span className="text-ink-400 italic">
-            No prompt yet — filters below were set by hand.
+            No prompt yet. The filters below were set by hand.
           </span>
         ) : (
           segments.map((segment) =>
@@ -288,8 +288,8 @@ export function ParseBreakdown() {
       {fields.length === 0 ? (
         <p className="relative rounded-2xl border border-dashed border-paper-300 bg-paper-100/70 px-4 py-3 text-sm text-ink-500">
           Nothing in that prompt mapped to a filter, so every listing is
-          showing. Try one of the example prompts above — or mention a county, a
-          budget, beds, BER, an outbuilding, fibre or a price drop.
+          showing. Try an example prompt above, or mention a county, budget,
+          beds, BER, an outbuilding, fibre or a price drop.
         </p>
       ) : (
         <div className="relative flex flex-wrap gap-2">

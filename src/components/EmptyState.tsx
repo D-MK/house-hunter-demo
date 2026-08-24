@@ -57,8 +57,7 @@ export function EmptyState() {
       </h3>
       <p className="mx-auto mt-1 max-w-md text-sm text-ink-500">
         The demo dataset holds 300 listings, so a tight combination can come
-        back empty. Loosen one constraint — drop a filter below, or widen its
-        value on the chip rail.
+        back empty. Drop a filter below, or widen its value on the chip rail.
       </p>
 
       {fields.length > 0 ? (

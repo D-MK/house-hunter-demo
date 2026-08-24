@@ -203,9 +203,9 @@ function ListingDetailDialog({ listing }: { listing: DemoListing }) {
             <Eyebrow>Why this matched</Eyebrow>
             {criteria.length === 0 ? (
               <p className="mt-3 rounded-2xl border border-dashed border-paper-300 bg-paper-100/70 px-4 py-3 text-sm text-ink-500">
-                No filters are active, so this one isn't matching anything in
-                particular — it's just part of the dataset. Describe what you're
-                after in the prompt box and the reasons will show up here.
+                No filters are active, so there is nothing to match against.
+                Describe a house in the prompt box and the reasons will appear
+                here.
               </p>
             ) : (
               <ul className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -258,9 +258,8 @@ function ListingDetailDialog({ listing }: { listing: DemoListing }) {
           ) : null}
 
           <p className="border-t border-paper-300 pt-4 text-[11px] leading-relaxed text-ink-400">
-            Synthetic listing. Any price history above is reconstructed from
-            this listing's own blurb and id — not a record of anything that
-            happened.
+            Synthetic listing. Any price history above is generated from the
+            listing's own blurb and id, not a record of real events.
           </p>
         </div>
       </div>

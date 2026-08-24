@@ -58,15 +58,14 @@ export function DemoBanner() {
             className="mt-3 grid gap-3 border-t border-paper-100/15 pt-3 text-sm leading-relaxed text-paper-200 sm:grid-cols-2"
           >
             <p>
-              This is a static site on GitHub Pages with no backend to hold an
-              LLM API key, so a deterministic local parser simulates the LLM
+              This is a static site on GitHub Pages. There is no backend to hold
+              an LLM API key, so a deterministic local parser simulates the LLM
               structured-output step.
             </p>
             <p>
-              The production version of this idea calls a real LLM with
-              structured output via a server-side gateway — same contract
-              (prompt in, structured filters out), same downstream search, only
-              the parsing step differs.
+              A production version would call a real LLM through a server-side
+              gateway. Same contract (prompt in, structured filters out), same
+              downstream search; only the parsing step differs.
             </p>
           </div>
         ) : null}

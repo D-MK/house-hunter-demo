@@ -25,9 +25,9 @@ export function App() {
             Describe the house. Watch it turn into filters.
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-500">
-            Type a plain-English brief — county, budget, beds, BER, an
-            outbuilding, room for a garden office — and see exactly which words
-            became which constraint before the search runs.
+            Type what you want in plain English: county, budget, beds, BER, an
+            outbuilding, room for a garden office. The parser shows which words
+            became which filter before the search runs.
           </p>
         </section>
 
@@ -40,9 +40,9 @@ export function App() {
         <div className="mx-auto grid max-w-6xl gap-2 px-5 py-8 text-xs leading-relaxed text-ink-400 sm:px-8">
           <p>
             Every listing, address, description and coordinate in this demo is
-            synthetic. Nothing here is scraped, and no real property is
-            represented — town, county and Eircode-prefix names are real so the
-            data reads plausibly.
+            synthetic. Nothing is scraped and no real property is represented.
+            Town, county and Eircode-prefix names are real so the data reads
+            plausibly.
           </p>
           <p>
             Static site · no backend · no accounts · no cookies · no analytics.
