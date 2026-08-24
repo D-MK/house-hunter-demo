@@ -30,23 +30,19 @@ export const HOW_IT_WORKS_TITLE = "How it works";
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     label: "Prompt",
-    detail:
-      "One sentence describing the house: county, budget, beds, plus criteria no form offers, like an outbuilding.",
+    detail: "County, budget, beds — plus criteria no form covers.",
   },
   {
     label: "Parse",
-    detail:
-      "A parser maps phrases to structured filters and highlights the words each filter came from.",
+    detail: "Each phrase maps to a filter, traced to its source words.",
   },
   {
     label: "Query",
-    detail:
-      "The filters run against 300 synthetic Irish listings, entirely in the browser.",
+    detail: "Filters run against 300 listings, client-side.",
   },
   {
     label: "Results",
-    detail:
-      "Matches render as cards and map pins; each result shows why it matched.",
+    detail: "Cards and map pins, each showing why it matched.",
   },
 ];
 
