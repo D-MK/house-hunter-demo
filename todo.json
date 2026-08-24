@@ -40,12 +40,12 @@
     {
       "id": 4,
       "name": "Search UI",
-      "status": "todo",
+      "status": "done",
       "tasks": [
-        { "task": "Prompt box + example chips + parse-breakdown highlight view", "status": "todo" },
-        { "task": "Editable/removable filter chip rail wired to Zustand store", "status": "todo" },
-        { "task": "Results grid with BER chip, attribute badges, Leaflet/OSM mini-map", "status": "todo" },
-        { "task": "Persistent demo-mode banner (not permanently dismissible)", "status": "todo" }
+        { "task": "Prompt box + example chips + parse-breakdown highlight view", "status": "done", "note": "connectors are measured from the live DOM (SVG beziers phrase -> chip), redrawn on resize" },
+        { "task": "Editable/removable filter chip rail wired to Zustand store", "status": "done", "note": "src/store/app.ts + 17 round-trip tests in src/store/app.test.ts" },
+        { "task": "Results grid with BER chip, attribute badges, Leaflet/OSM mini-map", "status": "done", "note": "react-leaflet lazy-loaded into its own chunk; CircleMarkers, no marker-icon assets, no API key" },
+        { "task": "Persistent demo-mode banner (not permanently dismissible)", "status": "done", "note": "one-line disclosure always rendered; only the 'why' panel collapses" }
       ]
     },
     {
