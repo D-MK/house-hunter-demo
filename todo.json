@@ -27,13 +27,14 @@
     {
       "id": 3,
       "name": "Parser + search core",
-      "status": "todo",
+      "status": "done",
       "tasks": [
-        { "task": "Build src/lib/parse.ts: deterministic prompt -> {filters, spans}", "status": "todo" },
-        { "task": "Cover richer attribute patterns (outbuilding, pod_space, fibre, price_drop) plus county/price/beds/type/BER", "status": "todo" },
-        { "task": "Build src/lib/search.ts: pure filter/sort over listings.json", "status": "todo" },
-        { "task": "Write src/data/examples.ts curated prompts", "status": "todo" },
-        { "task": "Add npm run validate-examples asserting every example returns >=5 results", "status": "todo" }
+        { "task": "Build src/lib/parse.ts: deterministic prompt -> {filters, spans}", "status": "done" },
+        { "task": "Cover richer attribute patterns (outbuilding, pod_space, fibre, price_drop) plus county/price/beds/type/BER", "status": "done" },
+        { "task": "Build src/lib/search.ts: pure filter/sort over listings.json", "status": "done" },
+        { "task": "Write src/data/examples.ts curated prompts", "status": "done", "note": "8 prompts, 6-25 results each; no town-scoped example — towns hold 1-4 listings so none can clear the >=5 floor" },
+        { "task": "Add npm run validate-examples asserting every example returns >=5 results", "status": "done", "note": "also wired into npm run generate-data, which prints 'all examples validated'" },
+        { "task": "Add Vitest + unit tests for parse and search (115 tests)", "status": "done" }
       ]
     },
     {

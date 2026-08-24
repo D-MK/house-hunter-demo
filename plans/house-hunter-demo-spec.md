@@ -40,6 +40,7 @@ export interface DemoFilters {
   price_min?: number;
   price_max?: number;
   beds_min?: number;
+  baths_min?: number;          // added Phase 3: spec required baths coverage, type had no field for it
   property_type?: string;
   ber_max?: string;            // band letter cap, e.g. "B" = A or B
   outbuilding?: boolean;
@@ -50,9 +51,17 @@ export interface DemoFilters {
   q?: string;
 }
 
+export interface MatchSpan {
+  start: number;
+  end: number;
+  field: keyof DemoFilters;
+}
+
+export type SortKey = "price_asc" | "price_desc" | "newest" | "area_desc";
+
 export interface ParseResult {
   filters: DemoFilters;
-  spans: { start: number; end: number; field: keyof DemoFilters }[];
+  spans: MatchSpan[];
 }
 ```
 

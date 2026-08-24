@@ -40,6 +40,7 @@ export interface DemoFilters {
   price_min?: number;
   price_max?: number;
   beds_min?: number;
+  baths_min?: number;
   property_type?: string;
   ber_max?: string; // band letter cap, e.g. "B" = A or B
   outbuilding?: boolean;
@@ -50,9 +51,20 @@ export interface DemoFilters {
   q?: string;
 }
 
+/** A slice of the raw prompt (half-open range `[start, end)`) and the filter field it
+ *  produced. Plain string offsets only — no markup, no HTML. */
+export interface MatchSpan {
+  start: number;
+  end: number;
+  field: keyof DemoFilters;
+}
+
 /** Parser output: the filters plus the character ranges of the raw prompt that produced
  *  each one, so the UI can highlight which words drove which filter. */
 export interface ParseResult {
   filters: DemoFilters;
-  spans: { start: number; end: number; field: keyof DemoFilters }[];
+  spans: MatchSpan[];
 }
+
+/** Result ordering. Absent means "leave the dataset's own order alone". */
+export type SortKey = "price_asc" | "price_desc" | "newest" | "area_desc";

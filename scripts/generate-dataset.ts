@@ -22,6 +22,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { MIN_EXAMPLE_RESULTS } from "../src/data/examples";
+import { checkExamples } from "../src/lib/example-check";
 import type { DemoListing } from "../src/lib/types";
 
 // ---------------------------------------------------------------------------
@@ -1621,6 +1623,23 @@ function main(): void {
 
   printStats(listings);
   console.log(`wrote ${outPath}`);
+
+  // A regenerated dataset must never strand a curated example prompt on an
+  // empty results page, so the generator gates on them itself.
+  const examples = checkExamples(listings);
+  const failures = examples.filter((example) => !example.ok);
+  if (failures.length > 0) {
+    console.error(
+      `Example validation failed (minimum ${MIN_EXAMPLE_RESULTS} results each):`,
+    );
+    for (const failure of failures) {
+      console.error(`  - "${failure.prompt}" -> ${failure.count} result(s)`);
+    }
+    process.exit(1);
+  }
+  console.log(
+    `examples:        ${examples.length} prompts, ${Math.min(...examples.map((e) => e.count))}-${Math.max(...examples.map((e) => e.count))} results each — all examples validated`,
+  );
 }
 
 // Only run when invoked directly (`npm run generate-data`), never on import.
