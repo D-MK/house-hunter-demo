@@ -12,6 +12,7 @@
  * nodes; the infographic is inline SVG only. Nothing here fetches anything.
  */
 
+import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -257,8 +258,12 @@ function StepItem({
         <p className="mt-1 text-[13px] leading-snug text-ink-600">
           {step.detail}
         </p>
-        <SourceLink href={githubFile(step.sourcePath)} small>
-          {step.sourcePath}
+        <SourceLink
+          href={githubFile(step.sourcePath)}
+          title={step.sourcePath}
+          small
+        >
+          {step.sourcePath.split("/").pop() ?? step.sourcePath}
         </SourceLink>
       </div>
     </li>
@@ -270,24 +275,27 @@ function StepItem({
 function SourceLink({
   href,
   small = false,
+  title,
   children,
 }: {
   href: string;
   small?: boolean;
-  children: string;
+  title?: string;
+  children: ReactNode;
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`inline-flex items-center gap-1 text-ink-500 underline decoration-paper-300 decoration-1 underline-offset-2 transition hover:text-ink-900 hover:decoration-ink-900 ${small ? "mt-1.5 text-[11px]" : ""}`}
+      title={title}
+      className={`inline-flex max-w-full items-center gap-1 text-ink-500 underline decoration-paper-300 decoration-1 underline-offset-2 transition hover:text-ink-900 hover:decoration-ink-900 ${small ? "mt-1.5 text-[11px]" : ""}`}
     >
-      {children}
+      <span className="truncate">{children}</span>
       <svg
         aria-hidden="true"
         viewBox="0 0 12 12"
-        className={small ? "h-2.5 w-2.5" : "h-3 w-3"}
+        className={`shrink-0 ${small ? "h-2.5 w-2.5" : "h-3 w-3"}`}
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
