@@ -40,6 +40,12 @@ export interface AppState {
   results: DemoListing[];
   /** Filter fields whose value has been hand-edited since parsing. */
   edited: (keyof DemoFilters)[];
+  /** The listing open in the detail modal, or `null` when it's closed. It lives
+   *  here rather than in `ResultsSection` because the modal's own "similar
+   *  listings" section re-opens it on a different house, and because the
+   *  checklist inside it reads `filters` — one owner for both keeps them in
+   *  step. Nothing about it is persisted. */
+  selected: DemoListing | null;
 
   setDraft: (draft: string) => void;
   /** Parse `text` (defaults to the current draft) and search with the result. */
@@ -51,6 +57,8 @@ export interface AppState {
   removeFilter: (field: keyof DemoFilters) => void;
   clearFilters: () => void;
   setSort: (sort: SortKey) => void;
+  openListing: (listing: DemoListing) => void;
+  closeListing: () => void;
   reset: () => void;
 }
 
@@ -67,6 +75,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
   sort: DEFAULT_SORT,
   results: resultsFor({}, DEFAULT_SORT),
   edited: [],
+  selected: null,
 
   setDraft: (draft) => set({ draft }),
 
@@ -79,6 +88,9 @@ export const useAppStore = create<AppState>()((set, get) => ({
       filters,
       spans,
       edited: [],
+      // A new search replaces what's underneath the modal, so leaving a house
+      // from the previous result set open on top of it would be a lie.
+      selected: null,
       results: resultsFor(filters, get().sort),
     });
   },
@@ -117,6 +129,13 @@ export const useAppStore = create<AppState>()((set, get) => ({
   setSort: (sort) =>
     set((state) => ({ sort, results: resultsFor(state.filters, sort) })),
 
+  // Editing or removing a filter deliberately leaves the modal open: its "why
+  // this matched" checklist is derived from `filters`, so it updates in place
+  // and you can watch a reason disappear as you drop the chip that caused it.
+  openListing: (listing) => set({ selected: listing }),
+
+  closeListing: () => set({ selected: null }),
+
   reset: () =>
     set({
       draft: "",
@@ -124,6 +143,7 @@ export const useAppStore = create<AppState>()((set, get) => ({
       filters: {},
       spans: [],
       edited: [],
+      selected: null,
       sort: DEFAULT_SORT,
       results: resultsFor({}, DEFAULT_SORT),
     }),

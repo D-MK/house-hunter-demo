@@ -18,7 +18,10 @@ export function MapPanel({ listings }: { listings: DemoListing[] }) {
   return (
     <section
       aria-label="Map of matching listings"
-      className="overflow-hidden rounded-2xl border border-paper-300 bg-white shadow-card"
+      // `isolate` matters: Leaflet gives its panes and controls z-indexes up to
+      // 1000, and without a stacking context of their own they compete with the
+      // rest of the page — the tiles paint straight over the listing modal.
+      className="isolate overflow-hidden rounded-2xl border border-paper-300 bg-white shadow-card"
     >
       <div className="flex items-baseline justify-between gap-2 border-b border-paper-200 px-4 py-2.5">
         <h2 className="text-sm font-semibold text-ink-800">On the map</h2>

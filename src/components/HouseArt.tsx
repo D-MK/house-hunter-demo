@@ -12,27 +12,7 @@
  */
 
 import { useId } from "react";
-
-/** FNV-1a — small, fast, and stable across runs (unlike hashing by iteration). */
-function hash(seed: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < seed.length; i += 1) {
-    h ^= seed.charCodeAt(i);
-    h = Math.imul(h, 0x01000193);
-  }
-  return h >>> 0;
-}
-
-/** mulberry32 — 32-bit PRNG, seeded once per listing. */
-function rng(seed: number): () => number {
-  let a = seed;
-  return () => {
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+import { hash, rng } from "@/lib/seeded";
 
 const SKIES = [
   ["#dff1f7", "#f7f0e2"],

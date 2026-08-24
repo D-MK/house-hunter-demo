@@ -131,6 +131,19 @@ export function formatEuro(value: number): string {
   return EUR.format(value);
 }
 
+const DATE = new Intl.DateTimeFormat("en-IE", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
+
+/** ISO date → "29 Jul 2026". Unparseable input is passed through untouched
+ *  rather than rendered as "Invalid Date". */
+export function formatListingDate(iso: string): string {
+  const date = new Date(`${iso}T00:00:00Z`);
+  return Number.isNaN(date.getTime()) ? iso : DATE.format(date);
+}
+
 export interface FieldMeta {
   /** Short name of what the filter constrains ("Budget", "Beds"). */
   group: string;

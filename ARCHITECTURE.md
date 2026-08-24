@@ -19,6 +19,14 @@ The spans are what make the parse visible: the UI re-renders the user's own prom
 
 Same prompt in, same filters out, every time. Zero network calls in the parse path.
 
+## Why the detail view is a modal, not a route
+
+Clicking a result opens a modal rather than navigating. The demo is one screen whose whole subject is the prompt → filters → results loop, and a per-listing route would mean either losing the prompt on the way back or serialising the entire search into the address bar to preserve it. Neither buys anything a portfolio piece needs, and both add a router.
+
+Keeping the results, the chip rail and the parse breakdown mounted underneath also pays off directly: the modal's "why this matched" checklist reads the live filters, so dropping a chip while it's open visibly removes a reason. The trade is real — no shareable per-listing link — and it's the one the out-of-scope list in `plans/p6-listing-detail-spec.md` takes deliberately.
+
+Everything in the modal is derived at render time by `src/lib/detail.ts` from the same public `DemoListing` the card had. The price-history chart is the one invented thing on the page: the dataset records *that* a price dropped, not what it dropped from, so the series is seeded from `listing.id` — the same house shows the same history on every visit, and the modal says on its own face that the chart is generated.
+
 ## What production would do
 
 The real product replaces exactly one box in that diagram. The prompt goes to a server route, which forwards it to an LLM gateway holding the API key, which calls a model with a JSON-schema tool spec so the response is structured filters rather than prose. The server validates the returned JSON against the same `DemoFilters` shape and hands it back to the client.

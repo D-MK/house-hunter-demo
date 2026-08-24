@@ -58,6 +58,19 @@
         { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "done", "note": "default GITHUB_TOKEN only; pages/id-token perms, concurrency group 'pages' with cancel-in-progress false" },
         { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "todo", "note": "Confirm repo owner/GitHub account before creation" }
       ]
+    },
+    {
+      "id": 6,
+      "name": "Listing detail view",
+      "status": "done",
+      "tasks": [
+        { "task": "Build src/lib/detail.ts: syntheticPriceHistory, matchedCriteria, similarListings", "status": "done", "note": "all pure; price history seeded from listing.id via the shared src/lib/seeded.ts PRNG, never Math.random/Date.now" },
+        { "task": "Unit-test the three derivations (src/lib/detail.test.ts)", "status": "done", "note": "28 tests: determinism, strictly-descending series, +/-20% same-county band, closest-price ordering" },
+        { "task": "Build the ListingDetail modal (full description, why-this-matched checklist, price sparkline, similar listings)", "status": "done", "note": "modal not a route - see ARCHITECTURE.md; inline SVG sparkline, no charting library" },
+        { "task": "Make the whole ListingCard open it; wire selected listing into the Zustand store", "status": "done", "note": "stretched <button> over the card (keyboard + SR name for free); store owns `selected` so the checklist tracks live filters" },
+        { "task": "Component test: click a card, assert the modal shows the full description (src/components/ListingDetail.test.tsx)", "status": "done", "note": "12 tests incl. Escape, X-button, focus return, similar-listing re-open; needed jsdom + Testing Library devDeps and a `test` block in vite.config.ts" },
+        { "task": "Refresh README + ARCHITECTURE.md for the new view", "status": "done", "note": "README kept under the Phase 5 350-word ceiling" }
+      ]
     }
   ]
 }

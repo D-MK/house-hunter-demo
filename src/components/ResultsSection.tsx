@@ -5,13 +5,18 @@
  * listings, and each card draws its own SVG, so rendering the lot on first paint
  * is a lot of DOM for something nobody scrolls to. The map always sees the full
  * result set.
+ *
+ * This is also where the detail modal is mounted and where the card that opened
+ * it is remembered, so closing the modal puts focus back where it started
+ * rather than at the top of the document.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EmptyState } from "@/components/EmptyState";
 import { ListingCard } from "@/components/ListingCard";
+import { ListingDetail } from "@/components/ListingDetail";
 import { MapPanel } from "@/components/MapPanel";
-import type { SortKey } from "@/lib/types";
+import type { DemoListing, SortKey } from "@/lib/types";
 import { useAppStore } from "@/store/app";
 
 const PAGE = 24;
@@ -28,14 +33,36 @@ export function ResultsSection() {
   const filters = useAppStore((s) => s.filters);
   const sort = useAppStore((s) => s.sort);
   const setSort = useAppStore((s) => s.setSort);
+  const selected = useAppStore((s) => s.selected);
+  const openListing = useAppStore((s) => s.openListing);
 
   const [visible, setVisible] = useState(PAGE);
   const filtered = Object.keys(filters).length > 0;
+
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   // A new search should always start at the top of the list again.
   useEffect(() => {
     setVisible(PAGE);
   }, [results]);
+
+  // Closing the modal hands focus back to the card that opened it. The card may
+  // have been unmounted in the meantime (a new search, or "show more" replacing
+  // the grid), so this is best-effort: `isConnected` keeps it from focusing a
+  // detached node.
+  useEffect(() => {
+    if (selected !== null) return;
+    const trigger = triggerRef.current;
+    triggerRef.current = null;
+    if (trigger !== null && trigger.isConnected) trigger.focus();
+  }, [selected]);
+
+  const handleOpen = (listing: DemoListing, trigger: HTMLElement) => {
+    // Only the first card in a chain is remembered — opening a "similar"
+    // listing from inside the modal shouldn't move the return target.
+    if (triggerRef.current === null) triggerRef.current = trigger;
+    openListing(listing);
+  };
 
   return (
     <section aria-label="Results" className="flex flex-col gap-5">
@@ -85,7 +112,11 @@ export function ResultsSection() {
             <>
               <div className="grid gap-5 sm:grid-cols-2 2xl:grid-cols-3">
                 {results.slice(0, visible).map((listing) => (
-                  <ListingCard key={listing.id} listing={listing} />
+                  <ListingCard
+                    key={listing.id}
+                    listing={listing}
+                    onOpen={handleOpen}
+                  />
                 ))}
               </div>
 
@@ -111,6 +142,8 @@ export function ResultsSection() {
           <MapPanel listings={results} />
         </div>
       </div>
+
+      <ListingDetail />
     </section>
   );
 }

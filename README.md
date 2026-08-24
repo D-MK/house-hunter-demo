@@ -6,7 +6,7 @@ Natural-language property search: type a plain-English brief, watch it turn into
 
 ## What it demonstrates
 
-- **Natural language → structured filters, made visible.** A prompt becomes county, price, beds, baths, property type, BER, floor area and attribute constraints. The UI links every filter chip back to the exact words that produced it, and each chip is editable or removable — the parse is a starting point the user can correct, not a black box.
+- **Natural language → structured filters, made visible.** A prompt becomes county, price, beds, type, BER, area and attribute constraints. The UI links every chip back to the words that produced it, and each is editable or removable — the parse is a starting point the user can correct, not a black box. Any result opens a detail view showing which criteria it satisfied.
 - **A typed data model.** One `DemoListing` / `DemoFilters` contract in TypeScript spans the dataset generator, the parser, the search layer and the UI, so a field can't drift between them.
 - **Static-first, zero-backend architecture.** No server, no database, no accounts, no cookies, no analytics, no API keys. The dataset is generated at build time and bundled; search and sort run in memory in the browser. The only network request the page makes is for map tiles.
 
@@ -28,8 +28,8 @@ npm run generate-data
 npm run dev
 ```
 
-`npm test` runs the parser, search and store unit tests. `npm run build` typechecks and produces the static bundle in `dist/`.
+`npm test` runs the parser, search, store and detail-view tests. `npm run build` typechecks and produces the static bundle in `dist/`.
 
 ## Stack
 
-Vite · React 19 · TypeScript · Tailwind CSS v4 · Zustand · Leaflet + OpenStreetMap · Vitest.
+Vite · React 19 · TypeScript · Tailwind CSS v4 · Zustand · Leaflet + OpenStreetMap · Vitest + Testing Library.

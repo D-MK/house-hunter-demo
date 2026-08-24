@@ -2,7 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -25,5 +25,13 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+  },
+  // The lib tests are plain functions and would run happily in Node; the
+  // component tests need a DOM. `environmentMatchGlob` is gone in Vitest 4, so
+  // jsdom is the default and the cheap tests just pay for a document they don't
+  // use — a couple of hundred milliseconds across the whole suite.
+  test: {
+    environment: "jsdom",
+    include: ["src/**/*.test.{ts,tsx}"],
   },
 });
