@@ -1,0 +1,20 @@
+/* Tailwind v4. The engine is wired in as a Vite plugin (`@tailwindcss/vite` in
+   vite.config.ts), not through a postcss.config.* file — v4's plugin handles
+   scanning and generation directly, so no PostCSS pipeline is needed here. */
+@import 'tailwindcss';
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}

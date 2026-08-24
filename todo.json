@@ -1,0 +1,62 @@
+{
+  "project": "house-hunter-demo",
+  "description": "Public recruiter-facing demo: NL prompt -> structured filters over a synthetic Irish property dataset. Static, GitHub Pages, no secrets. See plans/house-hunter-demo-spec.md.",
+  "lastUpdated": "2026-08-24",
+  "phases": [
+    {
+      "id": 1,
+      "name": "Repo scaffold",
+      "status": "done",
+      "tasks": [
+        { "task": "Scaffold Vite + React + TS + Tailwind v4 + Zustand project", "status": "done" },
+        { "task": "Define shared types in src/lib/types.ts (DemoListing, DemoFilters, ParseResult)", "status": "done" },
+        { "task": "Verify zero secrets/env vars and no forbidden deps (react-router, better-auth, drizzle-orm)", "status": "done" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dataset generator",
+      "status": "todo",
+      "tasks": [
+        { "task": "Build scripts/generate-dataset.ts (seeded, reproducible) producing ~300 synthetic listings", "status": "todo" },
+        { "task": "Cover all 26 counties with plausible per-county price/BER/eircode distributions", "status": "todo" },
+        { "task": "Exclude private-only fields (score, tier, dan_verdict, drive_min, reno_*, all_in_*, tags, url)", "status": "todo" },
+        { "task": "Commit generated src/data/listings.json", "status": "todo" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Parser + search core",
+      "status": "todo",
+      "tasks": [
+        { "task": "Build src/lib/parse.ts: deterministic prompt -> {filters, spans}", "status": "todo" },
+        { "task": "Cover richer attribute patterns (outbuilding, pod_space, fibre, price_drop) plus county/price/beds/type/BER", "status": "todo" },
+        { "task": "Build src/lib/search.ts: pure filter/sort over listings.json", "status": "todo" },
+        { "task": "Write src/data/examples.ts curated prompts", "status": "todo" },
+        { "task": "Add npm run validate-examples asserting every example returns >=5 results", "status": "todo" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Search UI",
+      "status": "todo",
+      "tasks": [
+        { "task": "Prompt box + example chips + parse-breakdown highlight view", "status": "todo" },
+        { "task": "Editable/removable filter chip rail wired to Zustand store", "status": "todo" },
+        { "task": "Results grid with BER chip, attribute badges, Leaflet/OSM mini-map", "status": "todo" },
+        { "task": "Persistent demo-mode banner (not permanently dismissible)", "status": "todo" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Docs + deploy",
+      "status": "todo",
+      "tasks": [
+        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "todo" },
+        { "task": "Write ARCHITECTURE.md with the two reviewed Mermaid diagrams (mock flow vs real production flow)", "status": "todo" },
+        { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "todo" },
+        { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "todo", "note": "Confirm repo owner/GitHub account before creation" }
+      ]
+    }
+  ]
+}
