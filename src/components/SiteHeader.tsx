@@ -1,7 +1,10 @@
 /**
- * Sticky brand bar. Purely chrome — no state, no navigation (single view by
- * design, so there is nothing to route to).
+ * Sticky brand bar plus the site's one piece of nav: the About trigger. Still
+ * no routing (single view by design) — About opens as an in-page overlay, the
+ * same non-routed modal convention as the listing detail view.
  */
+
+import { About } from "@/components/About";
 
 export function SiteHeader() {
   return (
@@ -16,9 +19,12 @@ export function SiteHeader() {
             Natural-language property search
           </p>
         </div>
-        <p className="ml-auto hidden text-xs text-ink-500 sm:block">
-          300 synthetic listings · 26 counties
-        </p>
+        <div className="ml-auto flex items-center gap-4">
+          <p className="hidden text-xs text-ink-500 sm:block">
+            300 synthetic listings · 26 counties
+          </p>
+          <About />
+        </div>
       </div>
     </header>
   );

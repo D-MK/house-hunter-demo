@@ -71,6 +71,17 @@
         { "task": "Component test: click a card, assert the modal shows the full description (src/components/ListingDetail.test.tsx)", "status": "done", "note": "12 tests incl. Escape, X-button, focus return, similar-listing re-open; needed jsdom + Testing Library devDeps and a `test` block in vite.config.ts" },
         { "task": "Refresh README + ARCHITECTURE.md for the new view", "status": "done", "note": "README kept under the Phase 5 350-word ceiling" }
       ]
+    },
+    {
+      "id": 7,
+      "name": "About page",
+      "status": "done",
+      "tasks": [
+        { "task": "Write src/content/about.ts (motivation + ordered process steps as data)", "status": "done", "note": "209 words counted by the spec's grep check, ceiling 450" },
+        { "task": "Build the About overlay (src/components/About.tsx) + nav trigger in SiteHeader", "status": "done", "note": "same modal conventions as ListingDetail: backdrop, Escape, Tab trap, focus in/return; infographic is inline SVG/CSS only, no external requests" },
+        { "task": "Component tests (src/components/About.test.tsx)", "status": "done", "note": "7 tests: visible nav trigger, content render, ordered-list steps, aria-modal labelling, focus in, Escape + X close with focus return" },
+        { "task": "Run all Phase 7 acceptance checks incl. full suite", "status": "done", "note": "181 tests green (174 existing + 7 new); build + dist verified" }
+      ]
     }
   ]
 }

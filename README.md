@@ -28,7 +28,7 @@ npm run generate-data
 npm run dev
 ```
 
-`npm test` runs the parser, search, store and detail-view tests. `npm run build` typechecks and produces the static bundle in `dist/`.
+`npm test` runs the parser, search, store, detail-view and about-overlay tests. `npm run build` typechecks and produces the static bundle in `dist/`.
 
 ## Stack
 
