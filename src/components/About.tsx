@@ -13,6 +13,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   ABOUT_CLOSING,
   ABOUT_MOTIVATION,
@@ -101,7 +102,13 @@ function AboutDialog({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
-  return (
+  // Portaled to <body>: the trigger button lives in <header>, and header has
+  // backdrop-blur-md (a backdrop-filter). Per the CSS spec that establishes a
+  // new containing block for `position: fixed` descendants, so without the
+  // portal this dialog would be pinned inside the header's own small box
+  // instead of the viewport. ListingDetail doesn't need this — it isn't
+  // nested inside a filtered ancestor.
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6">
       {/* Backdrop. Click-to-close is a convenience on top of the close button
           and Escape, so it carries no keyboard role of its own. */}
@@ -183,7 +190,8 @@ function AboutDialog({ onClose }: { onClose: () => void }) {
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
