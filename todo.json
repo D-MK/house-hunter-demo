@@ -1,7 +1,7 @@
 {
   "project": "house-hunter-demo",
   "description": "Public recruiter-facing demo: NL prompt -> structured filters over a synthetic Irish property dataset. Static, GitHub Pages, no secrets. See plans/house-hunter-demo-spec.md.",
-  "lastUpdated": "2026-08-24",
+  "lastUpdated": "2026-09-22",
   "phases": [
     {
       "id": 1,
@@ -53,10 +53,10 @@
       "name": "Docs + deploy",
       "status": "in-progress",
       "tasks": [
-        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "done", "note": "342 words total incl. headings; live-demo link is a <LIVE_DEMO_URL> placeholder until the Pages URL exists" },
+        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "done", "note": "342 words total incl. headings; live-demo link points at https://d-mk.github.io/house-hunter-demo/" },
         { "task": "Write ARCHITECTURE.md with the two reviewed Mermaid diagrams (mock flow vs real production flow)", "status": "done", "note": "both diagrams byte-identical to the in-session reviewed versions; prose covers key custody + mock trade-offs" },
         { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "done", "note": "default GITHUB_TOKEN only; pages/id-token perms, concurrency group 'pages' with cancel-in-progress false" },
-        { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "todo", "note": "Confirm repo owner/GitHub account before creation" }
+        { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "done", "note": "Public repo created; PR #1 merges the build into main, which publishes to GitHub Pages" }
       ]
     },
     {

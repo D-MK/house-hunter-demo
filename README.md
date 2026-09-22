@@ -2,7 +2,7 @@
 
 Natural-language property search: type a plain-English brief, watch it turn into structured filters, get results.
 
-**[Live demo](<LIVE_DEMO_URL>)** · **[ARCHITECTURE.md](ARCHITECTURE.md)** — how the parsing layer works, and how it would work in production.
+**[Live demo](https://d-mk.github.io/house-hunter-demo/)** · **[ARCHITECTURE.md](ARCHITECTURE.md)** — how the parsing layer works, and how it would work in production.
 
 ## What it demonstrates
 
