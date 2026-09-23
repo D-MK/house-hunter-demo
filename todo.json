@@ -1,0 +1,87 @@
+{
+  "project": "house-hunter-demo",
+  "description": "Public recruiter-facing demo: NL prompt -> structured filters over a synthetic Irish property dataset. Static, GitHub Pages, no secrets. See plans/house-hunter-demo-spec.md.",
+  "lastUpdated": "2026-09-22",
+  "phases": [
+    {
+      "id": 1,
+      "name": "Repo scaffold",
+      "status": "done",
+      "tasks": [
+        { "task": "Scaffold Vite + React + TS + Tailwind v4 + Zustand project", "status": "done" },
+        { "task": "Define shared types in src/lib/types.ts (DemoListing, DemoFilters, ParseResult)", "status": "done" },
+        { "task": "Verify zero secrets/env vars and no forbidden deps (react-router, better-auth, drizzle-orm)", "status": "done" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dataset generator",
+      "status": "done",
+      "tasks": [
+        { "task": "Build scripts/generate-dataset.ts (seeded, reproducible) producing ~300 synthetic listings", "status": "done" },
+        { "task": "Cover all 26 counties with plausible per-county price/BER/eircode distributions", "status": "done" },
+        { "task": "Exclude private-only fields (score, tier, dan_verdict, drive_min, reno_*, all_in_*, tags, url)", "status": "done" },
+        { "task": "Commit generated src/data/listings.json", "status": "done" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Parser + search core",
+      "status": "done",
+      "tasks": [
+        { "task": "Build src/lib/parse.ts: deterministic prompt -> {filters, spans}", "status": "done" },
+        { "task": "Cover richer attribute patterns (outbuilding, pod_space, fibre, price_drop) plus county/price/beds/type/BER", "status": "done" },
+        { "task": "Build src/lib/search.ts: pure filter/sort over listings.json", "status": "done" },
+        { "task": "Write src/data/examples.ts curated prompts", "status": "done", "note": "8 prompts, 6-25 results each; no town-scoped example — towns hold 1-4 listings so none can clear the >=5 floor" },
+        { "task": "Add npm run validate-examples asserting every example returns >=5 results", "status": "done", "note": "also wired into npm run generate-data, which prints 'all examples validated'" },
+        { "task": "Add Vitest + unit tests for parse and search (115 tests)", "status": "done" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Search UI",
+      "status": "done",
+      "tasks": [
+        { "task": "Prompt box + example chips + parse-breakdown highlight view", "status": "done", "note": "connectors are measured from the live DOM (SVG beziers phrase -> chip), redrawn on resize" },
+        { "task": "Editable/removable filter chip rail wired to Zustand store", "status": "done", "note": "src/store/app.ts + 17 round-trip tests in src/store/app.test.ts" },
+        { "task": "Results grid with BER chip, attribute badges, Leaflet/OSM mini-map", "status": "done", "note": "react-leaflet lazy-loaded into its own chunk; CircleMarkers, no marker-icon assets, no API key" },
+        { "task": "Persistent demo-mode banner (not permanently dismissible)", "status": "done", "note": "one-line disclosure always rendered; only the 'why' panel collapses" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Docs + deploy",
+      "status": "in-progress",
+      "tasks": [
+        { "task": "Write recruiter-facing README (<350 words main body, links ARCHITECTURE.md)", "status": "done", "note": "342 words total incl. headings; live-demo link points at https://d-mk.github.io/house-hunter-demo/" },
+        { "task": "Write ARCHITECTURE.md with the two reviewed Mermaid diagrams (mock flow vs real production flow)", "status": "done", "note": "both diagrams byte-identical to the in-session reviewed versions; prose covers key custody + mock trade-offs" },
+        { "task": "Add .github/workflows/deploy.yml (upload-pages-artifact + deploy-pages, no secrets)", "status": "done", "note": "default GITHUB_TOKEN only; pages/id-token perms, concurrency group 'pages' with cancel-in-progress false" },
+        { "task": "Create D-MK/house-hunter-demo on GitHub and push", "status": "done", "note": "Public repo created; PR #1 merges the build into main, which publishes to GitHub Pages" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Listing detail view",
+      "status": "done",
+      "tasks": [
+        { "task": "Build src/lib/detail.ts: syntheticPriceHistory, matchedCriteria, similarListings", "status": "done", "note": "all pure; price history seeded from listing.id via the shared src/lib/seeded.ts PRNG, never Math.random/Date.now" },
+        { "task": "Unit-test the three derivations (src/lib/detail.test.ts)", "status": "done", "note": "28 tests: determinism, strictly-descending series, +/-20% same-county band, closest-price ordering" },
+        { "task": "Build the ListingDetail modal (full description, why-this-matched checklist, price sparkline, similar listings)", "status": "done", "note": "modal not a route - see ARCHITECTURE.md; inline SVG sparkline, no charting library" },
+        { "task": "Make the whole ListingCard open it; wire selected listing into the Zustand store", "status": "done", "note": "stretched <button> over the card (keyboard + SR name for free); store owns `selected` so the checklist tracks live filters" },
+        { "task": "Component test: click a card, assert the modal shows the full description (src/components/ListingDetail.test.tsx)", "status": "done", "note": "12 tests incl. Escape, X-button, focus return, similar-listing re-open; needed jsdom + Testing Library devDeps and a `test` block in vite.config.ts" },
+        { "task": "Refresh README + ARCHITECTURE.md for the new view", "status": "done", "note": "README kept under the Phase 5 350-word ceiling" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "About page",
+      "status": "done",
+      "tasks": [
+        { "task": "Write src/content/about.ts (motivation + ordered process steps as data)", "status": "done", "note": "209 words counted by the spec's grep check, ceiling 450" },
+        { "task": "Build the About overlay (src/components/About.tsx) + nav trigger in SiteHeader", "status": "done", "note": "same modal conventions as ListingDetail: backdrop, Escape, Tab trap, focus in/return; infographic is inline SVG/CSS only, no external requests" },
+        { "task": "Component tests (src/components/About.test.tsx)", "status": "done", "note": "7 tests: visible nav trigger, content render, ordered-list steps, aria-modal labelling, focus in, Escape + X close with focus return" },
+        { "task": "Run all Phase 7 acceptance checks incl. full suite", "status": "done", "note": "181 tests green (174 existing + 7 new); build + dist verified" }
+      ]
+    }
+  ]
+}

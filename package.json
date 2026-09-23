@@ -1,0 +1,40 @@
+{
+  "name": "house-hunter-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Public, fully static portfolio demo of a natural-language house-search UX over a synthetic Irish listings dataset.",
+  "scripts": {
+    "dev": "vite",
+    "generate-data": "tsx scripts/generate-dataset.ts",
+    "validate-examples": "tsx scripts/validate-examples.ts",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^22.13.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
+    "typescript": "^5.7.3",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.11"
+  }
+}
